@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router";
-import routes from "./routes";
+import routes from "app/routes";
 
 export default function App() {
   return (

@@ -1,8 +1,7 @@
 import express from "express";
 import path from "path";
 import Loadable from "react-loadable";
-import stateRoutes from "./server/stateRoutes";
-
+import stateRoutes from "./stateRoutes";
 
 const app = express();
 

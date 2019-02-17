@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon --watch server --watch webpack --watch public --watch server --exec 'webpack --mode development --watch --config webpack/webpack.config.js && node index.js'",
+    "dev": "NODE_ENV=development npm-run-all --parallel dev:*",
+    "dev:server": "nodemon --watch server --exec 'node server/index.js'",
+    "dev:build-client": "nodemon --watch webpack --exec 'webpack --config webpack/webpack.config.js --watch'",
+
     "watch": "nodemon --watch webpack --exec 'webpack --mode development --watch --config webpack/webpack.config.js'",
     "serverProd": "NODE_ENV=production node index.js",
     "prod": "NODE_ENV=production webpack --config webpack/webpack.config.js"
@@ -23,7 +26,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-dynamic-import-node": "^2.2.0",
-    "babel-plugin-root-import": "^6.1.0",
+    "babel-plugin-module-resolver": "^3.2.0",
     "browser-sync": "^2.26.3",
     "browser-sync-webpack-plugin": "^2.2.2",
     "clean-webpack-plugin": "^1.0.1",
@@ -36,6 +39,7 @@
     "mobile-detect": "^1.4.3",
     "node-fetch": "^2.3.0",
     "nodemon": "^1.18.10",
+    "npm-run-all": "^4.1.5",
     "prettier": "^1.16.4",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -55,7 +59,6 @@
     "webpack-cli": "^3.1.2",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1",
-    "webpack-node-externals": "^1.7.2",
     "webpack-notifier": "^1.7.0"
   }
 }

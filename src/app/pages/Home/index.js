@@ -9,6 +9,7 @@ class Home extends React.Component {
     super(props);
     this.increase = this.increase.bind(this);
     this.decrease = this.decrease.bind(this);
+    console.log(1222)
   }
 
   componentDidMount() {

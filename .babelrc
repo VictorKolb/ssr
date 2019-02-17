@@ -1,11 +1,9 @@
 {
-  "presets":
-  [
+  "presets": [
     [
       "@babel/preset-env",
       {
-        "targets":
-        {
+        "targets": {
           "node": "current"
         }
       }
@@ -15,6 +13,14 @@
   "plugins": [
     "@babel/plugin-syntax-dynamic-import",
     "react-loadable/babel",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ]
+      }
+    ]
   ]
 }

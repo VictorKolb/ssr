@@ -2,35 +2,56 @@ const path = require("path");
 const webpack = require("webpack");
 const ReactLoadablePlugin = require("react-loadable/webpack")
   .ReactLoadablePlugin;
+const ManifestPlugin = require("webpack-manifest-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 const WebpackNotifierPlugin = require("webpack-notifier");
-const { browserList, fileLoaderOptions } = require("./options");
+const {
+  browserList,
+  fileLoaderOptions,
+  publicPath,
+  isProdMode,
+} = require("./options");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const merge = require("webpack-merge");
-const ManifestPlugin = require("webpack-manifest-plugin");
 
+const srcPath = path.resolve(`${__dirname}/../src`);
+// const isProdMode = settings.STAGE !== "dev";
 
 const common = {
   entry: {
-    client: "client.js",
+    client: "./index.js",
   },
 
+  context: srcPath,
+
+  output: {
+    path: publicPath,
+    publicPath: "../",
+    chunkFilename: isProdMode ? "[name].[hash].js" : "[name].js",
+    filename: isProdMode ? "[name].[hash].js" : "[name].js",
+  },
+
+  resolve: {
+    modules: [path.resolve(srcPath), "node_modules"],
+    extensions: [".js", ".jsx"],
+  },
 
   plugins: [
     // new BundleAnalyzerPlugin({ openAnalyzer: false }),
-    new CleanWebpackPlugin(["public"], {
+    new CleanWebpackPlugin(["public", "build"], {
       root: path.resolve(`${__dirname}/..`),
       verbose: true,
     }),
 
-    new ManifestPlugin({ basePath: "", publicPath: "" }),
-
     new ReactLoadablePlugin({
       filename: publicPath + "/react-loadable.json",
     }),
+
+    new ManifestPlugin({ basePath: "", publicPath: "" }),
+    new BundleAnalyzerPlugin({ openAnalyzer: false }),
 
     new webpack.DefinePlugin({
       // RAVEN_SENTRY_DSN: JSON.stringify(settings.RAVEN_SENTRY_DSN),
@@ -112,26 +133,25 @@ const development = {
   mode: "development",
   devtool: "source-map",
   plugins: [
-    new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new WebpackNotifierPlugin(),
-    new BrowserSyncPlugin(
-      {
-        port: 3000,
-        open: false,
-        // proxy: {
-        // target: "https://audio.dev",
-        // },
-        // https: {
-        //   key: path.resolve(`${__dirname}/../dockerfile/dev-env/audio.dev.key`),
-        //   cert: path.resolve(
-        //     `${__dirname}/../dockerfile/dev-env/audio.dev.crt`,
-        //   ),
-        // },
-      },
-      {
-        reload: false,
-      },
-    ),
+    // new BrowserSyncPlugin(
+    //   {
+    //     port: 3000,
+    //     open: false,
+    //     // proxy: {
+    //     // target: "https://audio.dev",
+    //     // },
+    //     // https: {
+    //     //   key: path.resolve(`${__dirname}/../dockerfile/dev-env/audio.dev.key`),
+    //     //   cert: path.resolve(
+    //     //     `${__dirname}/../dockerfile/dev-env/audio.dev.crt`,
+    //     //   ),
+    //     // },
+    //   },
+    //   {
+    //     reload: false,
+    //   },
+    // ),
   ],
 };
 

@@ -1,6 +1,6 @@
 import Loadable from "react-loadable";
 import React from "react";
-import { serverFetch as homeFetch } from "./pages/Home/serverFetch";
+import { serverFetch as homeFetch } from "app/pages/Home/serverFetch";
 
 const AsyncHome = Loadable({
   loader: () => import(/* webpackChunkName: "Home" */ "./pages/Home"),

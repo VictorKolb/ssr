@@ -1,3 +1,5 @@
+const path = require("path");
+
 const browserList = [
   "last 2 Chrome versions",
   "not Chrome < 60",
@@ -20,7 +22,13 @@ const fileLoaderOptions = {
   },
 };
 
+const publicPath = path.resolve(`${__dirname}/../public`);
+
+const isProdMode = process.env.NODE_ENV === "production";
+
 module.exports = {
   browserList,
   fileLoaderOptions,
+  publicPath,
+  isProdMode
 };
