@@ -40,19 +40,15 @@ const common = {
   },
 
   plugins: [
-    // new BundleAnalyzerPlugin({ openAnalyzer: false }),
+    new BundleAnalyzerPlugin({ openAnalyzer: false }),
     new CleanWebpackPlugin(["public", "build"], {
       root: path.resolve(`${__dirname}/..`),
       verbose: true,
     }),
-
     new ReactLoadablePlugin({
       filename: publicPath + "/react-loadable.json",
     }),
-
     new ManifestPlugin({ basePath: "", publicPath: "" }),
-    new BundleAnalyzerPlugin({ openAnalyzer: false }),
-
     new webpack.DefinePlugin({
       // RAVEN_SENTRY_DSN: JSON.stringify(settings.RAVEN_SENTRY_DSN),
       // RAVEN_CONFIG: JSON.stringify(settings.RAVEN_CONFIG),

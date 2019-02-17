@@ -1,13 +1,15 @@
-// HTML-шаблон
+import manifest from "../public/manifest.json";
+
 export default function template({
   helmet,
   content = "",
   bundles,
   state = {},
 }) {
+
   const scripts = `
-    <script src="/vendor.js"></script>
-    <script src="/client.js"></script>
+    <script src="/${manifest["vendor.js"]}"></script>
+    <script src="/${manifest["client.js"]}"></script>
   `;
 
   return `

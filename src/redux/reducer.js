@@ -1,5 +1,6 @@
 import { INCREASE, DECREASE } from "./actions";
-export const initialState = {
+
+const initialState = {
   husky: "",
   count: 5,
 };

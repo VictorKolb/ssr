@@ -4,12 +4,10 @@
   "description": "",
   "scripts": {
     "dev": "NODE_ENV=development npm-run-all --parallel dev:*",
-    "dev:server": "nodemon --watch server --exec 'node server/index.js'",
+    "dev:server": "nodemon --watch server --watch src --exec 'node server/index.js'",
     "dev:build-client": "nodemon --watch webpack --exec 'webpack --config webpack/webpack.config.js --watch'",
-
-    "watch": "nodemon --watch webpack --exec 'webpack --mode development --watch --config webpack/webpack.config.js'",
-    "serverProd": "NODE_ENV=production node index.js",
-    "prod": "NODE_ENV=production webpack --config webpack/webpack.config.js"
+    "prod": "NODE_ENV=production webpack --config webpack/webpack.config.js",
+    "serverProd": "NODE_ENV=production node server/index.js"
   },
   "author": "",
   "license": "ISC",
