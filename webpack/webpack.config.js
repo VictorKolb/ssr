@@ -18,7 +18,6 @@ const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
 const merge = require("webpack-merge");
 
 const srcPath = path.resolve(`${__dirname}/../src`);
-// const isProdMode = settings.STAGE !== "dev";
 
 const common = {
   entry: {
@@ -112,12 +111,9 @@ const common = {
       cacheGroups: {
         default: false,
         vendor: {
-          // name of the chunk
           name: "vendor",
           chunks: "initial",
-          // import file path containing node_modules
           test: /node_modules/,
-          // priority
           priority: 20,
         },
       },
@@ -130,24 +126,24 @@ const development = {
   devtool: "source-map",
   plugins: [
     new WebpackNotifierPlugin(),
-    // new BrowserSyncPlugin(
-    //   {
-    //     port: 3000,
-    //     open: false,
-    //     // proxy: {
-    //     // target: "https://audio.dev",
-    //     // },
-    //     // https: {
-    //     //   key: path.resolve(`${__dirname}/../dockerfile/dev-env/audio.dev.key`),
-    //     //   cert: path.resolve(
-    //     //     `${__dirname}/../dockerfile/dev-env/audio.dev.crt`,
-    //     //   ),
-    //     // },
-    //   },
-    //   {
-    //     reload: false,
-    //   },
-    // ),
+    new BrowserSyncPlugin(
+      {
+        port: 3000,
+        open: false,
+        // proxy: {
+        // target: "https://audio.dev",
+        // },
+        // https: {
+        //   key: path.resolve(`${__dirname}/../dockerfile/dev-env/audio.dev.key`),
+        //   cert: path.resolve(
+        //     `${__dirname}/../dockerfile/dev-env/audio.dev.crt`,
+        //   ),
+        // },
+      },
+      {
+        reload: false,
+      },
+    ),
   ],
 };
 
